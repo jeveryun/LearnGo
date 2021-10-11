@@ -1,20 +1,19 @@
+// Server3 is an "echo" server that displays request parameters.
 package main
 
 import (
 	"fmt"
 	"log"
 	"net/http"
-	"sync"
 )
-
-var mu sync.Mutex
-var count int
 
 func main() {
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
+//!+handler
+// handler echoes the HTTP request.
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s %s %s\n", r.Method, r.URL, r.Proto)
 	for k, v := range r.Header {
@@ -29,3 +28,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Form[%q] = %q\n", k, v)
 	}
 }
+
+//!-handler

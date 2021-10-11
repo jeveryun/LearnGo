@@ -1,3 +1,4 @@
+//!+
 package main
 
 import (
@@ -18,8 +19,9 @@ func main() {
 		resp.Body.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
-            os.Exit(1)
-        }
-        fmt.Printf("%s", b)
+			os.Exit(1)
+		}
+		fmt.Printf("%s", b)
 	}
 }
+
